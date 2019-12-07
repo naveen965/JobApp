@@ -5,17 +5,27 @@
  */
 package JOB;
 
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+
 /**
  *
  * @author Naveen Rajasekara
  */
 public class AddEmployee extends javax.swing.JFrame {
-
+    
+    ArrayList<Job> jobs;
+    ArrayList<Employee> employees;
+    
     /**
      * Creates new form AddEmployee
      */
     public AddEmployee() {
         initComponents();
+        
+        jobs = new ArrayList<Job>();
+        employees = new ArrayList<Employee>()
     }
 
     /**

@@ -49,7 +49,25 @@ public class AddNewJob extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-
+    
+    public void saveJobsFile(){
+        try{
+            FileOutputStream file = new FileOutputStream("Jobs.dat");
+            ObjectOutputStream outputFile = new ObjectOutputStream(file);
+            
+            for (int i = 0 ; i < jobs.size() ; i++){
+                outputFile.writeObject(jobs.get(i));
+            }
+            
+            outputFile.close();
+            
+            JOptionPane.showMessageDialog(null, "Successfully saved");
+            this.dispose();
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,6 +163,10 @@ public class AddNewJob extends javax.swing.JFrame {
         else{
             String name = jobName.getText().trim();
             String salary = jobSalary.getText().trim();
+            
+            Job job = new Job(Double.parseDouble(salary), name);
+            jobs.add(job);
+            saveJobsFile();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
