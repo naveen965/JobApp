@@ -88,15 +88,15 @@
         <Property name="text" type="java.lang.String" value="Name of the job     :"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Salary for this job  :"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="jobName">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jobNameActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Salary for this job  :"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jobSalary">
     </Component>

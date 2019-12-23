@@ -28,7 +28,7 @@ public class AddNewJob extends javax.swing.JFrame {
     
     public void populateArrayList(){
         try{
-            FileInputStream file = new FileInputStream("jobs.dat");
+            FileInputStream file = new FileInputStream("Jobs.dat");
             ObjectInputStream inputFile = new ObjectInputStream(file);
             
             boolean endOfFile = false;
@@ -37,7 +37,7 @@ public class AddNewJob extends javax.swing.JFrame {
                 try{
                     jobs.add((Job) inputFile.readObject());
                 }catch(EOFException e){
-                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    endOfFile = true;
                 }catch(Exception f){
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
@@ -50,7 +50,7 @@ public class AddNewJob extends javax.swing.JFrame {
         }
     }
     
-    public void saveJobsFile(){
+    public void saveJobsToFile(){
         try{
             FileOutputStream file = new FileOutputStream("Jobs.dat");
             ObjectOutputStream outputFile = new ObjectOutputStream(file);
@@ -79,8 +79,8 @@ public class AddNewJob extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jobName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jobSalary = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -92,13 +92,13 @@ public class AddNewJob extends javax.swing.JFrame {
 
         jLabel2.setText("Name of the job     :");
 
-        jLabel3.setText("Salary for this job  :");
-
         jobName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jobNameActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Salary for this job  :");
 
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\DELL\\Documents\\GitHub\\JobApp\\JOB\\src\\main\\java\\JOB\\Pics\\save.png")); // NOI18N
         jButton1.setText("Save");
@@ -166,7 +166,7 @@ public class AddNewJob extends javax.swing.JFrame {
             
             Job job = new Job(Double.parseDouble(salary), name);
             jobs.add(job);
-            saveJobsFile();
+            saveJobsToFile();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

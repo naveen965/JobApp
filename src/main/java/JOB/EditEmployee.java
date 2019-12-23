@@ -5,17 +5,94 @@
  */
 package JOB;
 
+import javax.swing.*;
+import java.util.*;
+import java.io.*;
+import java.text.*;
+
 /**
  *
  * @author Naveen Rajasekara
  */
 public class EditEmployee extends javax.swing.JFrame {
+    
+    ArrayList<Job> jobs;
+    ArrayList<Employee> employees;
+    DecimalFormat formatter;
 
     /**
      * Creates new form EditEmployee
      */
     public EditEmployee() {
         initComponents();
+        formatter = new DecimalFormat("#,###.00");
+
+        jobs = new ArrayList<Job>();
+        employees = new ArrayList<Employee>();
+        populateArrayList();
+        
+        String[] jobsArray = new String[jobs.size()];
+
+        for (int i = 0; i < jobs.size(); i++) {
+            jobsArray[i] = jobs.get(i).getNameOfJob() + ", R" + formatter.format(jobs.get(i).getSalary());
+        }
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(jobsArray));
+        
+        String[] employeeArray = new String[employees.size()];
+
+        for (int i = 0; i < employees.size(); i++) {
+            employeeArray[i] = employees.get(i).getName() + ", " + employees.get(i).getSurname();
+        }
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(employeeArray));
+    }
+    
+    public void populateArrayList() {
+        try {
+            FileInputStream file = new FileInputStream("Jobs.dat");
+            ObjectInputStream inputFile = new ObjectInputStream(file);
+
+            boolean endOfFile = false;
+
+            while (!endOfFile) {
+                try {
+                    jobs.add((Job) inputFile.readObject());
+                } catch (EOFException e) {
+                    endOfFile = true;
+//                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (Exception f) {
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+            }
+
+            inputFile.close();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+        try {
+            FileInputStream file2 = new FileInputStream("Employees.dat");
+            ObjectInputStream inputFile2 = new ObjectInputStream(file2);
+
+            boolean endOfFile = false;
+
+            while (!endOfFile) {
+                try {
+                    employees.add((Employee) inputFile2.readObject());
+                } catch (EOFException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } catch (Exception f) {
+                    JOptionPane.showMessageDialog(null, f.getMessage());
+                }
+            }
+
+            inputFile2.close();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
     /**
