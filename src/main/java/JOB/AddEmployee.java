@@ -72,7 +72,6 @@ public class AddEmployee extends javax.swing.JFrame {
                     jobs.add((Job) inputFile.readObject());
                 } catch (EOFException e) {
                     endOfFile = true;
-//                    JOptionPane.showMessageDialog(null, e.getMessage());
                 } catch (Exception f) {
                     JOptionPane.showMessageDialog(null, f.getMessage());
                 }
